@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+
+.post{
+  border: 1px solid black;
+  margin: 100px;
+}
+
+.boast{
+  color: green;
+}
+
+.roast {
+  color: red;
+}
+
+.vote {
+  display: block;
+  margin-bottom: 10px
+}

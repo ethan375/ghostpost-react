@@ -1,17 +1,18 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
+import Post from './Post'
+
 
 class AllPosts extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            error: null,
-            isLoaded: false,
-            data: []
-        }
-    }
-
-
-    componentDidMount() {
-        fetch("localhost:8000/ghosting/all")
+    render() {
+        return (
+             <ul>
+                 {this.props.data.map((post)=> {
+                     return <Post post={post} />
+                 })}
+             </ul>
+        )
     }
 }
+
+
+export default AllPosts;
