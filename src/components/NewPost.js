@@ -2,25 +2,39 @@ import React, { Component } from "react";
 
 class NewPost extends Component {
     state = {
-        boast: false,
+        boast: true,
         post: ""
     }
 
-    const handleSubmit = e => {
-        if (this.state.post) {
-            // going to make a fetch request to our backend
-        } else {
-            // make a thing about how we cant submit a post with no content in it
+    handleSubmit = e => {
+        let data = {
+            boast: this.state.boast,
+            body: this.state.post
         }
+        fetch(`http://localhost:8000/new-post/`, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+    }
+
+    handleChange = e => {
+        this.setState({post: e.target.value})
+    }
+
+    changeBoast = () => {
+        this.setState({boast: !this.state.boast})
     }
 
     render() {
         return(
             <div className="new-post">
                 <form>
-                    <input type="checkbox"></input>
-                    <input type="textarea"></input>
-                    <input type="submit"></input>
+                    <p>Roast?<input onChange={this.changeBoast} type="checkbox"></input></p>
+                    <textarea onChange={this.handleChange} rows="10" cols="50"></textarea>
+                    <p><input onClick={this.handleSubmit} type="submit"></input></p>
                 </form>
             </div>
         )

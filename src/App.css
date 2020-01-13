@@ -55,3 +55,11 @@
   display: block;
   margin-bottom: 10px
 }
+
+.id {
+  display: none;
+}
+
+.new-post {
+  margin: 50px;
+}
