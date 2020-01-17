@@ -51,11 +51,17 @@ class App extends React.Component {
   }
 
   filterVotes = () => {
-    let votes = this.state.data
-    votes = votes.sort((a, b) => {
-      return b.total_votes - a.total_votes
-    })
-    this.setState({votes: votes, view: "votes"})
+    if(this.state.view != 'votes'){
+      let votes = this.state.data
+      votes = votes.sort((a, b) => {
+        return b.total_votes - a.total_votes
+      })
+      this.setState({votes: votes, view: "votes"})
+    } else {
+      let votes = this.state.votes
+      votes = votes.reverse()
+      this.setState({votes: votes})
+    }
   }
 
   newPost = () =>{
