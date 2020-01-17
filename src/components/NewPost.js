@@ -11,7 +11,8 @@ class NewPost extends Component {
             boast: this.state.boast,
             body: this.state.post
         }
-        fetch(`http://localhost:8000/new-post/`, {
+        console.log(data)
+        fetch(`http://localhost:8000/posts/`, {
             method: "POST",
             headers: {
                 'Content-Type': "application/json"

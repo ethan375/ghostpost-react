@@ -18,31 +18,25 @@ class App extends React.Component {
     fetch('http://127.0.0.1:8000/posts/').then(res => res.json()).then(data => this.setState({data: data})).then(x => this.filter())
   }
 
+
   filter = () => {
     let data = this.state.data
-    let votes = []
     let boasts = []
     let roasts = []
 
-    // let prev = data[0].up_votes - data[0].down_votes
-    for(let i=0; i < data.length; i++) {
-    //   if(data[i].up_votes - data[i].down_votes >= prev){
-    //     votes.push(data[i])
-    //     prev = data[i].up_votes - data[i].down_votes
-    //   } else {
-    //     votes.unshift(data[i])
-    //   }
-
-
-
+   
+    for(let i=0; i < data.length; i++){
       if(data[i].boast) {
         boasts.push(data[i])
       } else {
         roasts.push(data[i])
       }
     }
-    this.setState({boasts: boasts, roasts: roasts, votes: votes})
+
+    this.setState({boasts: boasts, roasts: roasts, view:'home', data:data})
   }
+
+
 
   filterBoasts = () => {
     this.setState({view: "boasts"})
@@ -57,7 +51,11 @@ class App extends React.Component {
   }
 
   filterVotes = () => {
-    this.setState({view: "votes"})
+    let votes = this.state.data
+    votes = votes.sort((a, b) => {
+      return b.total_votes - a.total_votes
+    })
+    this.setState({votes: votes, view: "votes"})
   }
 
   newPost = () =>{
